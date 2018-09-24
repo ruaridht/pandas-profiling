@@ -133,8 +133,13 @@ def correlation_matrix(corrdf, title, **kwargs):
     matrix_image = axes_cor.imshow(corrdf, vmin=-1, vmax=1, interpolation="nearest", cmap='bwr')
     plt.title(title, size=18)
     plt.colorbar(matrix_image)
-    axes_cor.set_xticks(np.arange(0, corrdf.shape[0], corrdf.shape[0] * 1.0 / len(labels)))
-    axes_cor.set_yticks(np.arange(0, corrdf.shape[1], corrdf.shape[1] * 1.0 / len(labels)))
+
+    num_labels = len(labels)
+    if num_labels < 1:
+        return ''
+    
+    axes_cor.set_xticks(np.arange(0, corrdf.shape[0], corrdf.shape[0] * 1.0 / num_labels))
+    axes_cor.set_yticks(np.arange(0, corrdf.shape[1], corrdf.shape[1] * 1.0 / num_labels))
     axes_cor.set_xticklabels(labels, rotation=90)
     axes_cor.set_yticklabels(labels)
 
